@@ -1,47 +1,33 @@
 
-# This program takes a date as input and returns the day of the week for that date.
-def dayof_week(month,day,year):
-    """This function takes the month, day, and year as input and returns the day of the week for that date.
-    The function uses Zeller's Congruence to calculate the day of the week.
+'''
+
+@Author: Pratik Patil
+@Date: 2024-08-16
+@Last Modified by: Pratik Patil
+@Last Modified time: 2024-08-16
+@Title : Get Monthly Payments
+
+'''
+def Monthly_pay(principle_amount,year,interest_rate):
+    """
+    Discription:
+        This function calculates the monthly payment for a loan based on the principle amount, number of years, and interest rate.
     Args:
-        month (int): The month of the date.
-        day (int): The day of the date.
-        year (int): The year of the date.
-        Returns:
-        int: The day of the week for the date."""
-
-    year = year - (14 - month) // 12
-    date = year + year // 4 - year // 100 + year // 400
-    month = month + 12 * ((14 - month) // 12) - 2
-    day = (day + date + (31 * month) // 12) % 7
-    return day
-
+        principle_amount (float): The principle amount of the loan.
+        year (int): The number of years for the loan.
+        interest_rate (float): The interest rate for the loan.
+    Returns:
+        float: The monthly payment for the loan."""
+    n = 12*year
+    interest_rate = interest_rate/(12*100)
+    payment = (principle_amount*interest_rate)/(1-(1+interest_rate)**(-n))
+    return payment
 
 def main():
-    """This function takes the month, day, and year as input and prints the day of the week for that date.
-    The function uses the dayof_week function to calculate the day of the week.
-    Args:
-        None
-        Returns:
-        None"""
-
-    month = int(input("Enter the month: "))
-    day = int(input("Enter the day: "))
-    year = int(input("Enter the year: "))
-    day_of_week = dayof_week(month, day, year)
-    if day_of_week == 0:
-        print("Sunday")
-    elif day_of_week == 1:
-        print("Monday")
-    elif day_of_week == 2:
-        print("Tuesday")
-    elif day_of_week == 3:
-        print("Wednesday")
-    elif day_of_week == 4:
-        print("Thursday")
-    elif day_of_week == 5:
-        print("Friday")
-    elif day_of_week == 6:
-        print("Saturday")
+    p = float(input("Enter the principal amount: "))
+    y = int(input("Enter the number of years: "))
+    r = float(input("Enter the rate of interest: "))
+    payment = Monthly_pay(p,y,r)
+    print("The monthly payment is: ",payment)
 
 main()
